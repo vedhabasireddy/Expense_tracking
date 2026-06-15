@@ -1,6 +1,14 @@
+#TaskServices (Node js)
+#----------------------
+
 FROM node:24
+
 WORKDIR /app
+
 COPY package*.json ./
+
 RUN npm install
+
 COPY . .
-CMD ["npm", "start"]y
+
+CMD ["npm","start"]
