@@ -20,16 +20,25 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Routes
-app.get("/expenses",                        getAllExpenses);
-app.get("/expenses/:id",                    getExpenseById);
-app.get("/expenses/user/:userId",           getExpensesByUser);
-app.get("/expenses/category/:category",     getExpensesByCategory);
-app.post("/expenses",                       createExpense);
-app.put("/expenses/:id",                    updateExpense);
-app.delete("/expenses/:id",                 deleteExpense);
+// Health Check / Root Route
+app.get("/", (req, res) => {
+    res.status(200).json({
+        status: "success",
+        message: "Expense Service is running"
+    });
+});
+
+// Expense Routes
+app.get("/expenses", getAllExpenses);
+app.get("/expenses/:id", getExpenseById);
+app.get("/expenses/user/:userId", getExpensesByUser);
+app.get("/expenses/category/:category", getExpensesByCategory);
+app.post("/expenses", createExpense);
+app.put("/expenses/:id", updateExpense);
+app.delete("/expenses/:id", deleteExpense);
 
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
     console.log(`Expense Service running on port ${PORT}`);
 });
